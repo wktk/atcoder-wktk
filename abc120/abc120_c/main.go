@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
@@ -29,7 +30,8 @@ func main() {
 		}
 	}
 
-	last := cand[len(cand)-1]
+	sort.Slice(cand, func(i, j int) bool { return len(cand[i]) < len(cand[j]) })
+	last := cand[0]
 	fmt.Printf("%d\n", len(input)-len(last))
 }
 
