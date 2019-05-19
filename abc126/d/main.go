@@ -21,50 +21,43 @@ func line() string {
 
 func main() {
 	n, _ := strconv.Atoi(line())
+	b_ := n
+	n = b_
 
-	var grp1 []int
-	var grp2 []int
+	var grp [][][]int
 
 	for {
 		l := line()
 		if l == "" {
 			break
 		}
+		fmt.Println(l)
 		input := strings.Split(l, " ")
-
-		// fmt.Println(input)
 
 		a, _ := strconv.Atoi(input[0])
 		b, _ := strconv.Atoi(input[1])
 		c, _ := strconv.Atoi(input[2])
 
-		if contains(grp1, a) || contains(grp2, b) {
-			if c&0x1 == 1 {
-				grp1 = append(grp1, a)
-				grp2 = append(grp2, b)
+		grp[a][b] = append(grp[a][b], c)
+		grp[b][a] = append(grp[b][a], c)
+	}
+
+	for rs := range grp {
+		fmt.Println(rs)
+	}
+
+	/*
+		for k := 1; k <= n; k++ {
+		}
+		for {
+			if contains(grp1, k+1) {
+				fmt.Println("1")
 			} else {
-				grp1 = append(grp1, a)
-				grp1 = append(grp1, b)
-			}
-		} else {
-			if c&0x1 == 1 {
-				grp1 = append(grp1, b)
-				grp2 = append(grp2, a)
-			} else {
-				grp2 = append(grp2, a)
-				grp2 = append(grp2, b)
+				fmt.Println("0")
+
 			}
 		}
-	}
-	fmt.Println(grp1)
-	fmt.Println(grp2)
-	for k := 0; k < n; k++ {
-		if contains(grp1, k+1) {
-			fmt.Println("1")
-		} else {
-			fmt.Println("0")
-		}
-	}
+	*/
 }
 
 func contains(s []int, e int) bool {
